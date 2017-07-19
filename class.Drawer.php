@@ -29,6 +29,46 @@ class Drawer{
 		imagedestroy($canvas);
 	}
 
+	public function drawFrame($color, $style="left"){
+		switch($style){
+			case "full":
+				//vertical 0
+				imageline ( $this->getImageResource(), 0, 0, 0, $this->getImageHeight(), $colorInt);
+				//vertical 100
+				imageline ( $this->getImageResource(), $this->getImageWidth(), 0, $this->getImageWidth(), $this->getImageHeight(), $colorInt);
+
+				//horizontal 0
+				imageline ( $this->getImageResource(), 0, 0, $this->getImageWidth(), 0, $colorInt);
+				//horizontal 100
+				imageline ( $this->getImageResource(), 0, $this->getImageHeight(), $this->getImageWidth(), $this->getImageHeight(), $colorInt);
+			break;
+
+			case "left":
+				//vertical 0
+				imageline ( $this->getImageResource(), 0, 0, 0, $this->getImageHeight(), $colorInt);
+				//horizontal 100
+				imageline ( $this->getImageResource(), 0, $this->getImageHeight(), $this->getImageWidth(), $this->getImageHeight(), $colorInt);
+			break;
+
+			case "right":
+				//vertical 100
+				imageline ( $this->getImageResource(), $this->getImageWidth(), 0, $this->getImageWidth(), $this->getImageHeight(), $colorInt);
+				//horizontal 100
+				imageline ( $this->getImageResource(), 0, $this->getImageHeight(), $this->getImageWidth(), $this->getImageHeight(), $colorInt);
+			break;
+
+			case "top":
+				//horizontal 0
+				imageline ( $this->getImageResource(), 0, 0, $this->getImageWidth(), 0, $colorInt);
+			break;
+
+			case "bottom":
+				//horizontal 100
+				imageline ( $this->getImageResource(), 0, $this->getImageHeight(), $this->getImageWidth(), $this->getImageHeight(), $colorInt);
+			break;
+		}
+	}
+
 	public function createRGBColor($hex){
 		list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
 		return array($r, $g, $b);
